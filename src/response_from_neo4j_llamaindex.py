@@ -10,9 +10,12 @@ from llama_index.core import StorageContext
 from llama_index.core import Settings
 from llama_index.core.query_engine import RetrieverQueryEngine
 from llama_index.core.retrievers import KnowledgeGraphRAGRetriever
+import json
+
 load_dotenv()
 
-def response_from_neo4j(query):
+
+def response_from_neo4j(query,json_path='RAN_ontology.json'):
     # Neo4j credentials SLT
     # NEO4J_URI = os.getenv("NEO4J_URI")
     # DATABASE = os.getenv("NEO4J_DATABASE")
@@ -54,10 +57,13 @@ def response_from_neo4j(query):
         graph_rag_retriever,
     )
 
-    #add a prompt
-    response = query_engine.query(query)
+    with open(json_path, 'r') as file:
+        data = json.load(file)
+    prompt = f"You are an expert at converting natural language queries into Cypher queries.The RAN network ontology is described by the following JSON object:{data}"
+
+    response = query_engine.query(f"Given prompt:{prompt}, answer the query:{query}")
     return response
 
-query = "Who directed most movies?"
+query = "which area has highest base stations?"
 response = response_from_neo4j(query)
 print(response)
