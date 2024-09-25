@@ -1,5 +1,8 @@
+#context retrieval
 from response_from_neo4j import handle_user_query
 from response_from_redis import create_query_engine,create_redis_store
+#context augmentation
+from context_augmentation import generate_augmented_response
 
 user_query = input("Ask a query: ")
 response_neo4j = handle_user_query(user_query)
