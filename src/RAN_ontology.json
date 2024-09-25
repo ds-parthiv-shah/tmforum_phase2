@@ -1,0 +1,213 @@
+{
+
+  "relationships": [
+
+    {
+
+      "description": "A Site belongs to an Area.",
+
+      "from": "Site",
+
+      "to": "Area",
+
+      "type": "BELONGS_TO"
+
+    },
+
+    {
+
+      "description": "A BaseStation belongs to a Site.",
+
+      "from": "BaseStation",
+
+      "to": "Site",
+
+      "type": "BELONGS_TO"
+
+    },
+
+    {
+
+      "description": "An Event is experienced by a BaseStation.",
+
+      "from": "Event",
+
+      "to": "BaseStation",
+
+      "type": "EXPERIENCED_BY"
+
+    }
+
+  ],
+
+  "entities": {
+
+    "Site": {
+
+      "properties": {
+
+        "name": {
+
+         "description": "friendly name"
+
+        },
+
+        "id": {
+
+          "description": "unique identifier, with no semantic details"
+
+        }
+
+      }
+
+    },
+
+    "BaseStation": {
+
+      "properties": {
+
+        "vendor": {
+
+          "description": "the name of the base station vendor"
+
+        },
+
+        "name": {
+
+          "description": "friendly name"
+
+        },
+
+        "id": {
+
+          "description": "unique identifier, with no semantic details"
+
+        },
+
+        "technology": {
+
+          "description": "the base station technology",
+
+          "supportedValues": [
+
+            "2G",
+
+            "3G",
+
+            "4G",
+
+            "LTE",
+
+            "5G"
+
+          ]
+
+        }
+
+      }
+
+    },
+
+    "Area": {
+
+      "properties": {
+
+        "name": {
+
+          "description": "friendly name"
+
+        },
+
+        "id": {
+
+          "description": "unique identifier, with no semantic details"
+
+        }
+
+      }
+
+    },
+
+    "Event": {
+
+      "properties": {
+
+        "description": {
+
+          "description": "full event description"
+
+        },
+
+        "id": {
+
+          "description": "unique identifier, with no semantic details"
+
+        },
+
+        "status": {
+
+          "description": "event status",
+
+          "supportedValues": [
+
+            "Terminated",
+
+            "Active"
+
+          ]
+
+        },
+
+        "severity": {
+
+          "description": "event severity",
+
+          "supportedValues": [
+
+            "Critical",
+
+            "Major",
+
+            "Minor"
+
+          ]
+
+        },
+
+        "type": {
+
+          "description": "the event type",
+
+          "supportedValues": [
+
+            "alarm"
+
+          ]
+
+        },
+
+        "clearedOn": {
+
+          "description": "the event clearance timestamp, in ISO date format (may be missing for events in Active state)"
+
+        },
+
+        "name": {
+
+          "description": "friendly name of the event"
+
+        },
+
+        "createdOn": {
+
+          "description": "the event creation timestamp, in ISO date format"
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
